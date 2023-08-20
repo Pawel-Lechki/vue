@@ -3,7 +3,12 @@
   {{ postList }}
   </pre> -->
   <div>
-    <PostItem v-for="post of postList" :key="post.id" :post="post" />
+    <PostItem
+      v-for="post of postList"
+      :key="post.id"
+      :post="post"
+      @delete="onDelete(post)"
+    />
   </div>
 </template>
 
@@ -18,6 +23,10 @@
       .then((res) => res.json())
       .then((posts) => (postList.value = posts))
   })
+
+  function onDelete(post) {
+    postList.value = postList.value.filter((p) => p.id != post.id)
+  }
 </script>
 
 <style></style>
