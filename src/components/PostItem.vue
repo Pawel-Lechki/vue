@@ -17,6 +17,8 @@
 </template>
 
 <script setup>
+  import store from "../store"
+
   const props = defineProps({
     post: {
       type: Object,
@@ -31,13 +33,15 @@
       returen
     }
 
-    fetch(`https://jsonplaceholder.typicode.com/posts/${post.id}`, {
-      method: "DELETE",
-    }).then((res) => {
-      if (res.status === 200) {
-        emit("delete", post)
-      }
-    })
+    store.dispatch("deletePost", post.id)
+
+    // fetch(`https://jsonplaceholder.typicode.com/posts/${post.id}`, {
+    //   method: "DELETE",
+    // }).then((res) => {
+    //   if (res.status === 200) {
+    //     emit("delete", post)
+    //   }
+    // })
   }
 </script>
 
