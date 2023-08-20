@@ -1,7 +1,7 @@
 <script setup></script>
 
 <template>
-  <div>Hello from app</div>
+  <div></div>
 </template>
 
 <style scoped></style>
