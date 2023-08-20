@@ -1,4 +1,9 @@
 <template>
+  <p>
+    <RouterLink to="/" class="btn btn-outline-secondary"
+      >Go back to list</RouterLink
+    >
+  </p>
   <pre>
     {{ model }}
   </pre>
@@ -36,8 +41,9 @@
 
 <script setup>
   import { ref, onMounted } from "vue"
-  import { useRoute } from "vue-router"
+  import { useRoute, useRouter } from "vue-router"
 
+  const router = useRouter()
   const route = useRoute()
 
   const model = ref({
@@ -54,6 +60,28 @@
       .then((res) => res.json())
       .then((post) => (model.value = post))
   })
+
+  function onSubmit() {
+    if (model.value.id) {
+      fetch("https://jsonplaceholder.typicode.com/posts/" + model.value.id, {
+        method: "PUT",
+        body: JSON.stringify(model.value),
+      })
+        .then((res) => res.json())
+        .then((res) => {
+          router.push("/")
+        })
+    } else {
+      fetch("https://jsonplaceholder.typicode.com/posts/", {
+        method: "POST",
+        body: JSON.stringify(model.value),
+      })
+        .then((res) => res.json())
+        .then((res) => {
+          router.push("/")
+        })
+    }
+  }
 </script>
 
 <style></style>

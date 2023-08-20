@@ -2,6 +2,9 @@
   <!-- <pre>
   {{ postList }}
   </pre> -->
+  <p>
+    <RouterLink to="/new" class="btn btn-success">Add new</RouterLink>
+  </p>
   <div>
     <PostItem
       v-for="post of postList"
